@@ -5,6 +5,26 @@ namespace App\Models;
 use Exception;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Referral
+ *
+ * @property int $id
+ * @property int|null $u_id
+ * @property string|null $referred_by
+ * @property string|null $reSendTo
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Referral newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Referral newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Referral query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Referral whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Referral whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Referral whereReSendTo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Referral whereReferredBy($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Referral whereUId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Referral whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Referral extends Model
 {
 		protected $table = 'referrals';

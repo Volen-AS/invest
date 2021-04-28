@@ -6,6 +6,38 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+/**
+ * App\Models\ActLOtHistory
+ *
+ * @property int $id
+ * @property string $code_transaction_au
+ * @property string $emission_period
+ * @property string $amount_token_lot
+ * @property int $seller_u_id
+ * @property string $start_price
+ * @property array $previous_price
+ * @property int $previous_price_user
+ * @property array $lider_price
+ * @property int $lider_price_user
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory whereAmountTokenLot($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory whereCodeTransactionAu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory whereEmissionPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory whereLiderPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory whereLiderPriceUser($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory wherePreviousPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory wherePreviousPriceUser($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory whereSellerUId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory whereStartPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ActLOtHistory whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class ActLOtHistory extends Model
 {
     protected $table = 'act_lot_histories';

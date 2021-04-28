@@ -6,6 +6,24 @@ use Exception;
 use Illuminate\Database\Eloquent\Model;
 
 
+/**
+ * App\Models\Statistic
+ *
+ * @property int $id
+ * @property int $u_id
+ * @property string $total_balance
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Statistic newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Statistic newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Statistic query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Statistic whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Statistic whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Statistic whereTotalBalance($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Statistic whereUId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Statistic whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Statistic extends Model
 {
 	protected $table = 'statistics';

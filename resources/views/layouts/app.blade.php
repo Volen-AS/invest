@@ -628,7 +628,6 @@
             </ul>
         </nav>
     @endguest
-
     <div>
         @yield('content')
     </div>

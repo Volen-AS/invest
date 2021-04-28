@@ -6,7 +6,7 @@
 <div class="card">
     <div class="card-header">Profile</div>
         <div class="card-body">
-            <form method="POST" action="{{ route('edit-profile', $profile) }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('edit-profile') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="form-group row">

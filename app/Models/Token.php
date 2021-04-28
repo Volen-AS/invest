@@ -6,6 +6,20 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * App\Models\Token
+ *
+ * @property int $id
+ * @property string $token_price
+ * @property string $date
+ * @method static \Illuminate\Database\Eloquent\Builder|Token newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Token newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Token query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Token whereTokenPrice($value)
+ * @mixin \Eloquent
+ */
 class Token extends Model
 {
     protected $table = 'tokens';

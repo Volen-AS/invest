@@ -4,6 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\No_actiov_history
+ *
+ * @property int $id
+ * @property string|null $code_transaction_au
+ * @property string|null $emission_period
+ * @property string|null $amount_token_lot
+ * @property int|null $seller_u_id
+ * @property string|null $start_price
+ * @property int|null $first_buyer
+ * @property array|null $first_price_lot
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history query()
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history whereAmountTokenLot($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history whereCodeTransactionAu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history whereEmissionPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history whereFirstBuyer($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history whereFirstPriceLot($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history whereSellerUId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history whereStartPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|No_actiov_history whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class No_actiov_history extends Model
 {
     protected $table = 'no_actiov_histories';

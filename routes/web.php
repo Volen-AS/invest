@@ -37,7 +37,7 @@ Route::get('/', [IndexController::class, 'index'])->name('/');
 
 // LogIn Routes...
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'authenticate'])->name('auth');
+Route::post('login', [LoginController::class, 'login'])->name('auth');
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 // Registration Routes...
@@ -99,7 +99,7 @@ Route::middleware(['admin'])->group(function () {
 Route::group(['prefix' => 'cabinet', 'middleware' => ['auth', 'home']], function () {
     Route::get('/', [UserHomeController::class, 'index'])->name('cabinet');
 
-    Route::get('profile', [UserProfileController::class, 'showProfile'])->name('profile');
+    Route::get('profile{user}', [UserProfileController::class, 'showProfile'])->name('profile');
     Route::post('profile', [UserProfileController::class, 'editProfile'])->name('edit-profile');
 
 

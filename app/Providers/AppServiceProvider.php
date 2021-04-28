@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
-        view()->share('user', $request->user() ?? null);
+        //compose all the views....
+        view()->composer('*', function ($view) use ($request)
+        {
+            //...with this variable
+            $view->with('user', $request->user()  );
+        });
     }
 }

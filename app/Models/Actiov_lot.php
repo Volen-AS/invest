@@ -5,6 +5,40 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
+/**
+ * App\Models\Actiov_lot
+ *
+ * @property int $id
+ * @property string $code_transaction_au
+ * @property string $emission_period
+ * @property string $amount_token_lot
+ * @property int $seller_u_id
+ * @property string $start_lot_time
+ * @property string $start_price
+ * @property array $previous_price
+ * @property int $previous_price_user
+ * @property array $lider_price
+ * @property int $lider_price_user
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereAmountTokenLot($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereCodeTransactionAu($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereEmissionPeriod($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereLiderPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereLiderPriceUser($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot wherePreviousPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot wherePreviousPriceUser($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereSellerUId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereStartLotTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereStartPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Actiov_lot whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Actiov_lot extends Model
 {
     protected $table = 'actiov_lots';

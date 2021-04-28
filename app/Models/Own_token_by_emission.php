@@ -5,6 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Exception;
 
+/**
+ * App\Models\Own_token_by_emission
+ *
+ * @property int $id
+ * @property int $u_id
+ * @property string $date
+ * @property string $token_rate
+ * @property string $investment
+ * @property string $own_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission whereDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission whereInvestment($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission whereOwnToken($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission whereTokenRate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission whereUId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Own_token_by_emission whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Own_token_by_emission extends Model
 {
     protected $table = 'own_token_by_emissions';

@@ -25,16 +25,17 @@ use App\Models\No_actiov_history;
 use Illuminate\Http\Request;
 
 
-class UserHomeController extends Controller {
+class UserHomeController extends Controller
+{
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 		$u_id = Auth::id();
 		$my_chats = Chat_id::getMyChates($u_id);
         setcookie('my_chat',$my_chats['my_chat']);
         setcookie('aff_chat',$my_chats['aff_chat']);
         setcookie('ID', $u_id);
 		return view('user.cabinet')
-            ->with('user', $request->user())
             ->with([
             	'ourEvents' => null,
             	'news' =>null,

@@ -5,6 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
+/**
+ * App\Models\Chat_list_messegde
+ *
+ * @property int $message_id
+ * @property string $chat_id
+ * @property int $u_id
+ * @property string $message
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat_list_messegde newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat_list_messegde newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat_list_messegde query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat_list_messegde whereChatId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat_list_messegde whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat_list_messegde whereMessage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat_list_messegde whereMessageId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat_list_messegde whereUId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Chat_list_messegde whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Chat_list_messegde extends Model
 {
         protected $table = 'chat_list_messegdes';
