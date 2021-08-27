@@ -1,5 +1,6 @@
 <?php
 
+use Database\Seeders\MonthlyRateSeeder;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UsersTableSeeder;
 use Database\Seeders\TokenTableSeeder;
@@ -19,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TokenTableSeeder::class);
         $this->call(CategoriesTableSeeder::class);
         $this->call(ChatAffiliateSeeder::class);
+        $this->call(MonthlyRateSeeder::class);
     }
 }

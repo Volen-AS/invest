@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Auction;
 
-use App\Own_token_by_emission;
+use App\Models\Own_token_by_emission;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Carbon;
-use App\Token;
-use App\No_actiov_lot;
-use App\Actiov_lot;
-use App\Statistic;
+use App\Models\Token;
+use App\Models\No_actiov_lot;
+use App\Models\Actiov_lot;
+use App\Models\Statistic;
 
 class LotAuctionController extends Controller
 {

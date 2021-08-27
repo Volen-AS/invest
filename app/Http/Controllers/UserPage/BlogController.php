@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\UserPage;
 
-use App\Chat_list_messegde;
-use App\News;
-use App\Ticker;
-use App\Token;
+use App\Models\Chat_list_messegde;
+use App\Models\Post;
+use App\Models\Ticker;
+use App\Models\Token;
 use Auth;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +15,7 @@ class BlogController extends Controller
         $ticker = Ticker::getTicker();
         $u_id = Auth::id();
         if (is_null($post)) {
-            $top_post = News::where('category', $category)->latest()->first();
+            $top_post = Post::where('category', $category)->latest()->first();
             if (empty($top_post)) {
                 return view('user.newsUser')->with([
                     'tokens_tables'=>Token::getTokenEmissionDividends(),
@@ -24,7 +24,7 @@ class BlogController extends Controller
                     'top_post' => null, 'news' => null
                 ]);
             } else {
-                $news = News::where('category', $category)->paginate(9);
+                $news = Post::where('category', $category)->paginate(9);
                 return view('user.newsUser')->with([
                     'tokens_tables'=>Token::getTokenEmissionDividends(),
                     'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
@@ -34,8 +34,8 @@ class BlogController extends Controller
             }
         }
         else {
-            $top_post = News::find($post);
-            $news = News::where('category', $category)->paginate(9);
+            $top_post = Post::find($post);
+            $news = Post::where('category', $category)->paginate(9);
             if (empty($news)) {
                 return view('user.newsUser')->with([
                     'tokens_tables'=>Token::getTokenEmissionDividends(),

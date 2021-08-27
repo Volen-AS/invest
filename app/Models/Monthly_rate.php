@@ -26,16 +26,5 @@ class Monthly_rate extends Model
     protected $fillable = ['id','date', 'monthly_rate'];
 
     public $timestamps = false;
-
-//    public static function addMrate(){
-//        $date = Carbon::create(2019,12,01)->format('Y-m-d');
-//        $rate = 2.90;
-//        Monthly_rate::create([
-//            'date'=>$date,
-//            'monthly_rate'=>$rate
-//        ]);
-//        dd('create');
-//
-//    }
 }
 

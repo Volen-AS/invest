@@ -3,14 +3,12 @@
 namespace App\Http\Controllers\UserPage;
 
 use App\Http\Controllers\Controller;
-use App\Ticker;
+use App\Models\Ticker;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Redirect;
-use App\User;
+use App\Models\User;
 use Auth;
 
 

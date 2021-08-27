@@ -13,18 +13,18 @@
 		<div class="block_affiliated_structure">
 			<div class="top_bgc_block_affiliated_structure">
 				<div class="img_user_affiliated_structure"></div>
-				<div class="name_user_affiliated_structure">{{ $affiliate_data->name }}</div>
+				<div class="name_user_affiliated_structure">{{ $affiliate->name }}</div>
 				<div style="clear: both;"></div>
 			</div>
 			<div class="primery_inform_block_referral_first">
 					<div class="number_of_tokens_referral">
 						<div class="number_of_tokens_referral_left">Кількість викуплених токенів</div>
-						<div class="number_of_tokens_referral_right">{{ $affiliate_data_statistic_data->total_token }}</div>
+						<div class="number_of_tokens_referral_right">{{ $affiliate->myTotals->sum('own_token') }}</div>
 						<div style="clear: both;"></div>
 					</div>
 					<div class="number_of_tokens_referral">
 						<div class="number_of_tokens_referral_left">Кількість рефералів</div>
-						<div class="number_of_tokens_referral_right">{{ $affiliate_data_referrel }}</div>
+						<div class="number_of_tokens_referral_right">{{ $affiliate->referrals->count() }}</div>
 						<div style="clear: both;"></div>
 					</div>
 				</div>

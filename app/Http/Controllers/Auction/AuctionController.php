@@ -5,12 +5,12 @@ namespace App\Http\Controllers\Auction;
 use Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Token;
-use App\Statistic;
-use App\Referral;
-use App\Purchased_tokens;
-use App\Purchased_tokens_from_ref;
-use App\Own_token_by_emission;
+use App\Models\Token;
+use App\Models\Statistic;
+use App\Models\Referral;
+use App\Models\Purchased_tokens;
+use App\Models\Purchased_tokens_from_ref;
+use App\Models\Own_token_by_emission;
 use Illuminate\Support\Str;
 use Exception;
 

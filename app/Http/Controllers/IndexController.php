@@ -46,11 +46,11 @@ class IndexController extends Controller
     }
 
     public function news() {
-         $news = News::all()->count();
+         $news = Post::all()->count();
             return view('guest.news')->with([
                 'tokens_tables'=>Token::getTokenEmissionDividends(),
                 'ticker'=> Ticker::getTicker(),
-                'news' => News::orderBy('created_at','DESC')->get()
+                'news' => Post::orderBy('created_at','DESC')->get()
             ]);
     }
 

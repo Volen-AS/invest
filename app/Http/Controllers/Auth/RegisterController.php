@@ -145,7 +145,7 @@ class RegisterController extends Controller
             while($countReferral<3){
                 $masterAffiliat = Referral::where('u_id', $affiliateId)->latest()->first();
                 $countReferral = Referral::where('referred_by', $masterAffiliat->reSendTo)->count();
-                $masteraffiliatRole = User::where('u_id', $masterAffiliat->reSendTo)->first();
+                $masteraffiliatRole = User::where('id', $masterAffiliat->reSendTo)->first();
                 if($masteraffiliatRole->role == 9){
                     break;
                 }

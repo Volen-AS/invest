@@ -4,10 +4,9 @@ namespace App\Http\Controllers\UserPage;
 
 use App\Http\Controllers\Controller;
 use App\Models\Ticker;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
-use App\Models\OurEvent;
-use App\Models\Post;
 use App\Models\User;
 use App\Models\Statistic;
 use App\Models\Referral;
@@ -55,174 +54,6 @@ class UserHomeController extends Controller
                 'referralReward'=>Statistic::referralReward($u_id)
             ]);
 	}
-
-    public function banners() {
-        $u_id = Auth::id();
-
-        $code = Auth::user()->code;
-
-        $refLink = url('/register') .  '?ref=' . $code;
-
-        return view('user.referrals.banners', compact('refLink'))->with([
-            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-            'ticker'=> Ticker::getTicker(),
-        ]);
-
-    }
-
-    public function privateChat() {
-        $u_id = Auth::id();
-        return view('user.referrals.privateChat')->with([
-            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-            'ticker'=> Ticker::getTicker(),
-           ]);
-
-    }
-
-    public function activeTeam() {
-         $u_id = Auth::id();
-        return view('user.referrals.activeTeam')->with([
-            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-            'ticker'=> Ticker::getTicker(),
-            ]);
-
-    }
-
-    public function structure() {
-
-        $u_id = Auth::id();
-        $ckeck9 =  Referral::where('u_id', $u_id)->latest()->first();
-            if(is_null($ckeck9)){
-                $referrals_dates = Referral::where('referred_by', $u_id)->get();
-                    if(!count($referrals_dates)){
-                        return view('user.referrals.structureVipUser')->with([
-                            'referrals_full_datas' => $referrals_dates,
-                            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-                            'ticker'=> Ticker::getTicker(),
-                        ]);
-                    }
-                    else{
-                        foreach ($referrals_dates as $referrals_data) {
-                            $statistic = Own_token_by_emission::myTotalToken($referrals_data->u_id);
-                            $referrals_data_referral = Referral::where('referred_by', $referrals_data->u_id)->count();
-                            $referral_data_name = User::select('name', 'email','u_id')->where('u_id', $referrals_data->u_id)->first();
-                            $d[] = [$referrals_data, $statistic, $referrals_data_referral, $referral_data_name];
-
-
-                        }
-                        return view('user.referrals.structureVipUser')->with([
-                            'referrals_full_datas' => $d,
-                            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-                            'ticker'=> Ticker::getTicker(),
-                        ]);
-                    }
-                }
-            else{
-                $u_id_data = Referral::where('u_id', $u_id)->select('reSendTo')->latest()->first();
-                $referrals_dates = Referral::where('referred_by', $u_id)->get();
-                    if(!count($referrals_dates)){
-                        return view('user.referrals.structure')->with([
-                            'affiliate_data' => User::where('u_id', $u_id_data->reSendTo)->first(),
-                            'affiliate_data_statistic_data' => Statistic::where('u_id', $u_id_data->reSendTo)->first(),
-                            'affiliate_data_referrel' => Referral::where('reSendTo', $u_id_data->reSendTo)->count(),
-                            'referrals_full_datas' => $referrals_dates,
-                            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-                            'ticker'=> Ticker::getTicker(),
-                        ]);
-                    }
-                    else{
-
-                        foreach ($referrals_dates as $referrals_data) {
-
-                            $statistic = Own_token_by_emission::myTotalToken($referrals_data->u_id);
-                            $referrals_data_referral = Referral::where('referred_by', $referrals_data->u_id)->count();
-                            $referral_data_name = User::select('name', 'email','u_id')->where('u_id', $referrals_data->u_id)->first();
-                            $d[] = [$referrals_data, $statistic, $referrals_data_referral, $referral_data_name];
-                        }
-                        return view('user.referrals.structure')->with([
-                            'affiliate_data' => User::where('u_id', $u_id_data->reSendTo)->first(),
-                            'affiliate_data_statistic_data' => Statistic::where('u_id', $u_id_data->reSendTo)->first(),
-                            'affiliate_data_referrel' => Referral::where('reSendTo', $u_id_data->reSendTo)->count(),
-                            'referrals_full_datas' => $d,
-                            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-                            'ticker'=> Ticker::getTicker(),
-                        ]);
-                    }
-            }
-
-    }
-
-    public function referralForm() {
-        $u_id = Auth::id();
-        $ckeck9 =  Referral::where('u_id', $u_id)->first();
-
-        if(is_null($ckeck9)){
-            $u_id_data = Referral::select('reSendTo')->where('u_id', $u_id)->first();
-            $referrals_dates = Referral::where('referred_by', $u_id)->get();
-                if(!count($referrals_dates)){
-                    return view('user.referrals.referralFormVipUser')->with([
-                        'referrals_full_datas' => $referrals_dates,
-                        'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-                        'ticker'=> Ticker::getTicker(),
-                        ]);
-                }
-                else{
-
-                    foreach ($referrals_dates as $referrals_data) {
-                        $statistic = Own_token_by_emission::myTotalToken($referrals_data->u_id);
-                        $referrals_data_referral = Referral::where('referred_by', $referrals_data->u_id)->count();
-                        $referral_data_profile = Profile::where('u_id', $referrals_data->u_id)->first();
-                        $referral_data_name = User::select('name', 'email')->where('u_id', $referrals_data->u_id)->first();
-
-                        $a[]= [$referrals_data, $statistic, $referrals_data_referral, $referral_data_profile, $referral_data_name];
-                    }
-            return view('user.referrals.referralFormVipUser')->with([
-                    'referrals_full_datas' => $a,
-                'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-                'ticker'=> Ticker::getTicker(),
-            ]);
-            }
-        }
-        else{
-            $u_id_data = Referral::where('u_id', $u_id)->select('reSendTo')->latest()->first();
-
-            $referrals_dates = Referral::where('referred_by', $u_id)->get();
-                 if(!count($referrals_dates)){
-                    return view('user.referrals.referralForm')->with([
-                        'affiliate_data' => User::where('u_id', $u_id_data->reSendTo)->first(),
-                        'affiliate_data_statistic_data' => Statistic::where('u_id', $u_id_data->reSendTo)->first(),
-                        'affiliate_data_referrel' => Referral::where('reSendTo', $u_id_data->reSendTo)->count(),
-                        'affiliate_data_profile' => Profile::where('u_id', $u_id_data->reSendTo)->first(),
-                        'referrals_full_datas' => $referrals_dates,
-                        'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-                        'ticker'=> Ticker::getTicker(),
-                        ]);
-                }
-                else{
-
-                    foreach ($referrals_dates as $referrals_data) {
-                        $statistic = Own_token_by_emission::myTotalToken($referrals_data->u_id);
-                        $referrals_data_referral = Referral::where('referred_by', $referrals_data->u_id)->count();
-                        $referral_data_profile = Profile::where('u_id', $referrals_data->u_id)->first();
-                        $referral_data_name = User::select('name', 'email')->where('u_id', $referrals_data->u_id)->first();
-
-                        $a[]= [$referrals_data, $statistic, $referrals_data_referral, $referral_data_profile, $referral_data_name];
-                    }
-            return view('user.referrals.referralForm')->with([
-                    'affiliate_data_profile' => Profile::where('u_id', $u_id_data->reSendTo)->first(),
-                    'affiliate_data' => User::where('u_id', $u_id_data->reSendTo)->first(),
-                    'affiliate_data_statistic_data' => Statistic::where('u_id', $u_id_data->reSendTo)->first(),
-                    'affiliate_data_referrel' => Referral::where('reSendTo', $u_id_data->reSendTo)->count(),
-                    'referrals_full_datas' => $a,
-                'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-                'ticker'=> Ticker::getTicker(),
-            ]);
-
-            }
-        }
-    }
-
-
 
 //===================================//
 
@@ -320,7 +151,7 @@ class UserHomeController extends Controller
         $u_id = Auth::id();
 
         $my_ref = Referral::getMyRefferalId($u_id);
-        $user_my_ref = array_prepend($my_ref, $u_id);
+        $user_my_ref = Arr::prepend($my_ref, $u_id);
 
         $users = User::whereIn('u_id',$user_my_ref)->select('u_id','name')->get();
         foreach ($users as $user){
@@ -330,8 +161,8 @@ class UserHomeController extends Controller
 
             $user_total_token = Own_token_by_emission::where('u_id',$user->u_id)->sum('own_token');
             $user_total_invest = Own_token_by_emission::where('u_id',$user->u_id)->sum('investment');
-            $user = array_add($user, 'user_total_token',$user_total_token);
-            $user = array_add($user, 'user_total_invest',$user_total_invest);
+            $user = Arr::add($user, 'user_total_token',$user_total_token);
+            $user = Arr::add($user, 'user_total_invest',$user_total_invest);
             $each_mounths = [];
             for ($i = 1; $i <= $diff+1; $i++)  {
                 $present['sum_token'] = Own_token_by_emission::where('u_id',$user->u_id)->where('date',$start_time)->sum('own_token');
@@ -344,7 +175,7 @@ class UserHomeController extends Controller
                 $each_mounths[] = $present;
                 $start_time = $start_time->addMonths(1);
             }
-            $user = array_add($user, 'each_mounths',$each_mounths);
+            $user = Arr::add($user, 'each_mounths',$each_mounths);
         }
         $total_token =  Own_token_by_emission::whereIn('u_id',$user_my_ref)->sum('own_token');
         $total_investment =  Own_token_by_emission::whereIn('u_id',$user_my_ref)->sum('investment');
@@ -363,18 +194,18 @@ class UserHomeController extends Controller
 
         $interes_from_refs_buy_token = Purchased_tokens_from_ref::where('u_id_to',$u_id)
             ->join('users','purchased_tokens_from_refs.u_id','=','users.u_id')
-            ->select('purchased_tokens_from_refs.transaction','purchased_tokens_from_refs.in_cash','purchased_tokens_from_refs.created_at','users.name')
+            ->select(['purchased_tokens_from_refs.transaction','purchased_tokens_from_refs.in_cash','purchased_tokens_from_refs.created_at','users.name'])
             ->get();
         $team = Referral::getMyRefferalId($u_id);
         $interes_from_refs_auctions = ActLOtHistory::getLotHistoriesTeam($team);
             foreach ($interes_from_refs_auctions as $interes_from_refs_auction){
                 if(in_array($interes_from_refs_auction->seller_u_id,$team)){
                     $name_user = User::where('u_id', $interes_from_refs_auction->seller_u_id)->first()->name;
-                    $interes_from_refs_auction = array_add($interes_from_refs_auction, 'seller_name', $name_user);
+                    $interes_from_refs_auction = Arr::add($interes_from_refs_auction, 'seller_name', $name_user);
                 }
                 else if(in_array($interes_from_refs_auction->previous_price_user,$team)){
                     $name_user = User::where('u_id', $interes_from_refs_auction->previous_price_user)->first()->name;
-                    $interes_from_refs_auction = array_add($interes_from_refs_auction, 'previous_name', $name_user);
+                    $interes_from_refs_auction = Arr::add($interes_from_refs_auction, 'previous_name', $name_user);
                 }
                 else if(in_array($interes_from_refs_auction->lider_price_user,$team)){
                     $name_user = User::where('u_id', $interes_from_refs_auction->lider_price_user)->first()->name;
@@ -400,30 +231,6 @@ class UserHomeController extends Controller
             'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
         ]);
 
-    }
-
-    public function ownTokens(){
-        $u_id = Auth::id();
-        $sum_invest = Own_token_by_emission::where('u_id',$u_id)->sum('investment');
-        $sum_token = Own_token_by_emission::where('u_id',$u_id)->sum('own_token');
-
-        $table_own_tokens = Own_token_by_emission::where('u_id',$u_id)->get();
-        foreach ($table_own_tokens as $table_own_token){
-            $token_rate = $table_own_token->date;
-            $toke_in_auction_actin =  Actiov_lot::where(['seller_u_id'=>$u_id,'emission_period'=>$token_rate])->sum('amount_token_lot');
-            $toke_in_auction_Noactin = No_actiov_lot::where(['seller_u_id'=>$u_id,'emission_period'=>$token_rate])->sum('amount_token_lot');
-            $total_token_in_auction = $toke_in_auction_Noactin + $toke_in_auction_actin;
-            $table_own_token = array_add($table_own_token,'total_token_in_auction',$total_token_in_auction);
-
-        }
-        return view('user.tokens.ownTokens')->with([
-            'ticker'=> Ticker::getTicker(),
-            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-            'table_own_tokens' => $table_own_tokens,
-            'sum_invest'=> $sum_invest,
-            'sum_token'=>$sum_token,
-            'min_lot'=>Own_token_by_emission::minLot()
-        ]);
     }
 
     public function noActive() {

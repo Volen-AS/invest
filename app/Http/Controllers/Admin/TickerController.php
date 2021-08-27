@@ -56,7 +56,6 @@ class TickerController extends Controller
 
     public function togged(Ticker $ticker)
     {
-        dd($ticker);
         $oldTicker = Ticker::where('is_active', true)->first();
         $oldTicker->is_active = false;
         $oldTicker->save();

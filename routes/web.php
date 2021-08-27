@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserPage\ReferralController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\Auth\LoginController;
@@ -103,18 +104,18 @@ Route::group(['prefix' => 'cabinet', 'middleware' => ['auth', 'home']], function
     Route::post('profile', [UserProfileController::class, 'editProfile'])->name('edit-profile');
 
 
-    Route::get('referrals/structure', [UserHomeController::class, 'structure'])->name('referrals.structure');
-    Route::get('referrals/banners', [UserHomeController::class, 'banners']);
-    Route::get('referrals/privateChat', [UserHomeController::class, 'privateChat']);
-    Route::get('referrals/activeTeam', [UserHomeController::class, 'activeTeam'])->name('activeTeam');
-    Route::get('referrals/referralForm', [UserHomeController::class, 'referralForm']);
+    Route::get('referrals/structure', [ReferralController::class, 'structure'])->name('referrals.structure');
+    Route::get('referrals/banners', [ReferralController::class, 'banners']);
+    Route::get('referrals/privateChat', [ReferralController::class, 'privateChat']);
+    Route::get('referrals/activeTeam', [ReferralController::class, 'activeTeam'])->name('activeTeam');
+    Route::get('referrals/referralForm', [ReferralController::class, 'referralForm']);
 
 
     Route::get('edit-auth', [UserResetAuthDataController::class, 'showResetAuthData']);
     Route::post('edit-auth/nickname', [UserResetAuthDataController::class, 'updateNickName'])->name('updateNickName');
     Route::post('edit-auth/email', [UserResetAuthDataController::class, 'updateEmail'])->name('updateEmail');
     Route::post('edit-auth/pass', [UserResetAuthDataController::class, 'changePassword'])->name('changePassword');
-    Route::get('finances/paymentSystems/payeer', [UserHomeController::class, 'payeer'])->name('payeer');
+    Route::get('finances/paymentSystems/payeer', [UserHomeownTokensController::class, 'payeer'])->name('payeer');
     Route::get('finances/paymentSystems/paypal', [UserHomeController::class, 'paypal'])->name('paypal');
     Route::get('finances/paymentSystems/skrill', [UserHomeController::class, 'skrill'])->name('skrill');
 
@@ -124,7 +125,7 @@ Route::group(['prefix' => 'cabinet', 'middleware' => ['auth', 'home']], function
 
     Route::get('finances/homeFinance', [UserHomeController::class, 'homeFinance'])->name('homeFinance');
     Route::get('finances/withdrawFunds', [UserHomeController::class, 'withdrawFunds'])->name('withdrawFunds');
-    Route::get('finances/replenishment', 'UserPage\UserHomeController@replenishment')->name('replenishment');
+    Route::get('finances/replenishment', 'UserHomeController@replenishment')->name('replenishment');
     Route::get('finances/transactionHistory', [UserHomeController::class, 'transactionHistory'])->name('transactionHistory');
     Route::get('finances/rewardHistory', [UserHomeController::class, 'rewardHistory'])->name('rewardHistory');
     Route::get('finances/accountsWallets', [UserHomeController::class, 'accountsWallets'])->name('accountsWallets');

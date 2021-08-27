@@ -22,20 +22,6 @@
                                 @csrf
 
                                 <div class="form-group row">
-                                    <label for="category_id" class="col-md-4 title_form_add_new text-md-right" >Вибиріть категорію</label>
-
-                                    <div class="col-md-8">
-                                        <select name="category_id",  class="form-control{{ $errors->has('category_id') ? ' is-invalid' : '' }}" style="height:35px;width: 100%" required>
-                                            @foreach($categories as $key => $category)
-                                                @if($post->category->id == $key)
-                                                    <option value="{{$key}}" selected>{{ $category }}</option>
-                                                @endif
-                                                <option value="{{$key}}">{{ $category }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label for="name" class="col-md-4 title_form_add_new text-md-right" >Назва новини:</label>
                                     <div class="col-md-8">
                                         {{ Form::text('name', old('name', $post->name), ['class' => 'form-control ' . ($errors->has('name') ? ' is-invalid' : ''), 'id' => 'name', 'required']) }}
@@ -48,36 +34,7 @@
                                 </div>
 
 
-                            <div class="form-group row">
-                                    <label for="post" class="col-md-4 title_form_add_new text-md-right">Головна частина</label>
-                                    <div class="col-md-8">
-                                        {{ Form::textarea('post', old('post', $post->post), ['class' => 'form-control ' . ($errors->has('post') ? ' is-invalid' : ''), 'id' => 'post', 'required']) }}
-                                        @if ($errors->has('post'))
-                                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first('post') }}</strong>
-                                    </span>
-                                        @endif
-                                    </div>
-                                </div>
 
-                                <div class="form-group row">
-                                    <label class="col-md-4 title_form_add_new text-md-right">Картнка статті:</label>
-
-                                    <div class="col-md-6">
-                                        <div class="container">
-                                            <label class="label" for="input"></label>
-
-                                            <div class="input">
-                                                <input name="news_pic" id="file" type="file" class="form-control{{ $errors->has('news_pic') ? ' is-invalid' : '' }}" style="width: 100%;">
-                                                @if ($errors->has('news_pic'))
-                                                    <span class="invalid-feedback" role="alert">
-                                                      <strong>{{ $errors->first('news_pic') }}</strong>
-                                                </span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 <div class="form-group row mb-0">
                                     <div class="col-md-12">

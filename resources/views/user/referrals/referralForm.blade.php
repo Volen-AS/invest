@@ -12,18 +12,18 @@
                     <div class="block_affiliated_referralForm">
                         <div class="top_bgc_block_affiliated_structure">
                             <div class="img_user_affiliated_structure"></div>
-                            <div class="name_user_affiliated_structure">{{ $affiliate_data->name }}</div>
+                            <div class="name_user_affiliated_structure">{{ $affiliate->name }}</div>
                             <div style="clear: both;"></div>
                         </div>
                         <div class="primery_inform_block_referral_first">
                             <div class="number_of_tokens_referral">
                                 <div class="number_of_tokens_referral_left">Кількість викуплених токенів</div>
-                                <div class="number_of_tokens_referral_right">{{ $affiliate_data_statistic_data->total_token }}</div>
+                                <div class="number_of_tokens_referral_right">{{ $affiliate->myTotals->sum('own_token') }}</div>
                                 <div style="clear: both;"></div>
                             </div>
                             <div class="number_of_tokens_referral">
                                 <div class="number_of_tokens_referral_left">Кількість рефералів</div>
-                                <div class="number_of_tokens_referral_right">{{ $affiliate_data_referrel }}</div>
+                                <div class="number_of_tokens_referral_right">{{ $affiliate->referrals->count() }}</div>
                                 <div style="clear: both;"></div>
                             </div>
                         </div>
@@ -60,32 +60,32 @@
                                 <tr>
                                     <td>Реєстраційний номер</td>
                                     <td></td>
-                                    <td>{{ $affiliate_data->u_id }}</td>
+                                    <td>{{ $affiliate->id }}</td>
                                 </tr>
                                 <tr>
                                     <td>Нік</td>
                                     <td></td>
-                                    <td>{{ $affiliate_data->name }}</td>
+                                    <td>{{ $affiliate->name }}</td>
                                 </tr>
                                 <tr>
                                     <td>ФІО</td>
                                     <td></td>
-                                    <td>{{ $affiliate_data_profile->first_name}} {{ $affiliate_data_profile->last_name}} {{ $affiliate_data_profile->second_name }}</td>
+                                    <td>{{ $affiliate->profile->first_name ?? ''}} {{ $affiliate->profile->last_name ?? ''}} {{ $affiliate->profile->second_name ?? '' }}</td>
                                 </tr>
                                 <tr>
                                     <td>E-mail</td>
                                     <td></td>
-                                    <td>{{ $affiliate_data->email }}</td>
+                                    <td>{{ $affiliate->email ?? ''}}</td>
                                 </tr>
                                 <tr>
                                     <td>Телефон</td>
                                     <td></td>
-                                    <td>{{ $affiliate_data_profile->phone_number }}</td>
+                                    <td>{{ $affiliate->phone_number ?? ''}}</td>
                                 </tr>
                                 <tr>
                                     <td>Skype</td>
                                     <td></td>
-                                    <td>{{ $affiliate_data_profile->skype }}</td>
+                                    <td>{{ $affiliate->skype ?? ''}}</td>
                                 </tr>
                             </table>
                         </div>

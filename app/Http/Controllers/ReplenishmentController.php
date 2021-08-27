@@ -13,7 +13,7 @@ class ReplenishmentController extends Controller
 	public function setPayment($pms){
 
 		if($pms == 'paypal'){
-			return view('payment.paypal.PayPalForm'); ;
+			return view('payment.paypal.PayPalForm');
 		}
 
 		if($pms == 'yarcode'){

@@ -9,6 +9,7 @@ services:
       - ./public:/project/public:cached
     links:
       - invest
+      - node
     networks:
       - frontend
   invest:
@@ -28,7 +29,8 @@ services:
       DB_USERNAME: root
       DB_PASSWORD: invest_password
   mysql:
-    image: mysql:8.0.17
+    image: mysql/mysql-server:8.0.24
+    command: --max_allowed_packet=1G
     cap_add:
       - SYS_NICE  # CAP_SYS_NICE
     ports:
@@ -36,17 +38,23 @@ services:
     environment:
       MYSQL_DATABASE: investdb
       MYSQL_ROOT_PASSWORD: invest_password
+      MYSQL_ROOT_HOST: "%"
     volumes:
       - ./:/project:ro
     working_dir: /project
     networks:
       - backend
   node:
-    image: node:8.12
+    image: node:12-alpine
     volumes:
-      - ./:/project:cached
+      - ./public:/project/public:cached
     working_dir: /project
     command: tail -F anything
+    ports:
+      - "8080:8080"
+    networks:
+      - frontend
+      - backend
 
 networks:
   frontend:

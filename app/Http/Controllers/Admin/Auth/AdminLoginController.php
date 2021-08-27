@@ -28,7 +28,7 @@ class AdminLoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // if success login
-            return redirect()->route('admin.admin ');
+            return redirect()->route('admin.admin');
         }
         // if failed login
         return redirect()->back();

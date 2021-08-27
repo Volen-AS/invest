@@ -1,14 +1,14 @@
 setTimeout(function () {
-    var socket = io('http://invest.localtest.me:8001');
+    var socket = io('http://invest.localtest.me:8080');
     socket.on('connect', function () {
 
         window.clientSocket = socket;
-         var clientId = '';
-         var my_chat_id = '';
-         var affiliateChat = '';
+        let clientId = '';
+        let my_chat_id = '';
+        let affiliateChat = '';
 
-        var decodedCookie = decodeURIComponent(document.cookie).split(';');
-            decodedCookie.forEach(function (val) {
+        const decodedCookie = decodeURIComponent(document.cookie).split(';');
+        decodedCookie.forEach(function (val) {
                 if(val.match(/ID/)){
                     val =val.trim();
                     clientId = val.replace('ID=', '');
@@ -66,7 +66,7 @@ setTimeout(function () {
             $(running_line).text(new_line);
             setTimeout(function () {
                 let check_line =  $('#running_line').children('.marquee').children('span').text();
-                if(check_line == new_line){
+                if(check_line === new_line){
                     $(running_line).text(old_line);
                 }
                 else{

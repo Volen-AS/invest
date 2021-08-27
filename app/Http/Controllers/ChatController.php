@@ -6,11 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Auth;
-use App\User;
-use App\Chat_list_messegde;
-use App\Privet_messegde;
-use App\Referral;
-use App\Chat_id;
+use App\Models\Chat_list_messegde;
+use App\Models\Privet_messegde;
 
 
 class ChatController extends Controller

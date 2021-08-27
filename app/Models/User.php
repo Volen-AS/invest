@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -65,7 +67,33 @@ class User extends Authenticatable //implements MustVerifyEmail
 
     public function profile()
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(Profile::class, 'user_id', 'id');
+    }
+
+    public function myTotals(): HasMany
+    {
+        return $this->hasMany(Own_token_by_emission::class, 'u_id');
+    }
+
+    public function referrals(): HasMany
+    {
+        return $this->hasMany(Referral::class, 'referred_by');
+    }
+
+    public function balance(): HasOne
+    {
+        return $this->hasOne(Statistic::class, 'u_id');
+    }
+
+
+    public function getMyAffiliate(): User
+    {
+        $affId = Referral::where('u_id', $this->id)->latest()->first();
+        if ($affId) {
+            return User::findOrFail($affId->reSendTo);
+        }
+        return User::whereRole(9)->first();
+
     }
 
     public static function getChat_id(){

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Auction;
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Actiov_lot;
-use App\Statistic;
+use App\Models\Actiov_lot;
+use App\Models\Statistic;
 use Auth;
-use Illuminate\Support\Facades\Schema;
 
 class ActiveLotBetController extends Controller
 {

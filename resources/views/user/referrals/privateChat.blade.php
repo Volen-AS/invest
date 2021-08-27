@@ -15,17 +15,17 @@
 
           </ul>
 
-          <div class="shoutbox-form">  
-            <form method="post" action="">
-              <textarea id="shoutbox-comment" name="Coment" rows="3" placeholder="Ваш коментар"></textarea>  
+          <div class="shoutbox-form">
+            <form method="" action="">
+              <textarea id="shoutbox-comment" name="Coment" rows="3" placeholder="Ваш коментар"></textarea>
             <button class="buttom_chat_cabinet">Відправити</button>
-            </form> 
-            <div style="clear: both;"></div>             
+            </form>
+            <div style="clear: both;"></div>
           </div>
-          
+
         </div>
 
-     
+
       </div>
 
       <div class="col-lg-4 col-md-12 col-sm-12 ">

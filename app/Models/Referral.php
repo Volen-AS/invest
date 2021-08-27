@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\Referral
@@ -32,6 +33,11 @@ class Referral extends Model
 		protected $fillable = ['u_id', 'referred_by', 'reSendTo'
 		];
 
+		public function user(): BelongsTo
+        {
+            return $this->belongsTo(User::class, 'u_id');
+        }
+
         public static function getAffilait($u_id){
 
             try {
@@ -42,6 +48,7 @@ class Referral extends Model
                 return false;
             }
         }
+
         public static function getMyRefferalId ($u_id){
             $chat_id = Chat_id::where('u_id',$u_id)->first()->chat_id;
             $refferal_ids = Chat_list_user::where('chat_id',$chat_id )->pluck('u_id')->toArray();

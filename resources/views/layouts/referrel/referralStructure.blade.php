@@ -1,34 +1,30 @@
-@if(count($referrals_full_datas))
+@if(count($referrals))
 
-    @foreach($referrals_full_datas as $referrals_full_data)
+    @foreach($referrals as $referral)
 
-
-        @if($referrals_full_data['0']->referred_by == $referrals_full_data['0']->reSendTo)
-
-			<div class="block_referral_first" data-refStru="{{ $referrals_full_data['3']->email }}">
-
-
+        @if($referral->referred_by == $referral->reSendTo)
+			<div class="block_referral_first" data-refStru="{{ $referral->user->email }}">
 				<div class="top_bgc_block_referral_first">
 
 					<div class="img_user_referral"></div>
-					<div class="name_user_referral">{{ $referrals_full_data['3']->name }}</div>
+					<div class="name_user_referral">{{ $referral->user->name }}</div>
 					<div style="clear: both;"></div>
 				</div>
 				<div class="primery_inform_block_referral_first">
 					<div class="number_of_tokens_referral">
 						<div class="number_of_tokens_referral_left">Кількість викуплених токенів</div>
-						<div class="number_of_tokens_referral_right">{{ $referrals_full_data['1'] }}</div>
+						<div class="number_of_tokens_referral_right">{{ $referral->user->myTotals->sum('own_token') }}</div>
 						<div style="clear: both;"></div>
 					</div>
 					<div class="number_of_tokens_referral">
 						<div class="number_of_tokens_referral_left">Кількість рефералів</div>
-						<div class="number_of_tokens_referral_right">{{ $referrals_full_data['2'] }}</div>
+						<div class="number_of_tokens_referral_right">{{ $referral->user->referrals->count() }}</div>
 						<div style="clear: both;"></div>
 					</div>
 				</div>
 			</div>
 
-			<div class="transaction_referrals_table" data-refStru="{{ $referrals_full_data['3']->email }}">
+			<div class="transaction_referrals_table" data-refStru="{{ $referral->user->email }}">
 	          <table class="">
 	          	<tr>
 	          		<td style="text-align: center; font-size: 20px;" colspan="9">Транзакції реферала</td>
@@ -126,7 +122,7 @@
 				<div class="block_transition_referral" data-hint="Транзитний реферал">
 					<div class="top_bgc_block_referral_first">
 						<div class="transition_referral_img_user_referral"></div>
-						<div class="name_user_referral">(Ім'я реферала)</div>
+						<div class="name_user_referral">{{ $referral->user->name }}</div>
 						<div style="clear: both;"></div>
 					</div>
 					<div class="name_transit_referral">Транзитний реферал</div>

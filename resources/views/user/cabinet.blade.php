@@ -65,7 +65,8 @@
           <tr>
             <td >Вільні кошти (відображаються у вибраній валюті) (незадіяні в аукціоні)</td>
             <td></td>
-            <td id="balance_in_cabinet">{{ $statistics->total_balance }}</td>
+{{--            <td id="balance_in_cabinet">{{ $statistics->total_balance }}</td>--}}
+            <td id="balance_in_cabinet"> 33</td>
           </tr>
           <tr>
             <td>Кошти, задіяні в аукціоні в ставках на покупку токенів</td>
@@ -118,7 +119,8 @@
                     </tr>
                     <tr>
                         <td>Сума покупки, $</td>
-                        <td><input id="buyNewToken" class="number_modal_buy_token" placeholder="{{ $statistics->total_balance }}"  step="0.01" type="number"></td>
+                        <td><input id="buyNewToken" class="number_modal_buy_token" placeholder="54" step="0.01" type="number"></td>
+{{--                        <td><input id="buyNewToken" class="number_modal_buy_token" placeholder="{{ $statistics->total_balance }}" step="0.01" type="number"></td>--}}
                     </tr>
                     <tr>
                         <td></td>
