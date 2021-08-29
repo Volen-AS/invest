@@ -93,7 +93,7 @@ class LotAuctionController extends Controller
                 ]);
             $final_date_act = $moveLot->created_at->addDays(3);
             $result_time = $final_date_act->format('Y-m-d H:i:s');
-            $min_bet = Own_token_by_emission::minbet();
+            $min_bet = Own_token_by_emission::minBet();
             $rate_of_token = Token::where('date',$moveLot->emission_period )->first()->token_price;
             $lot_p->delete();
             return response()->json(['new' => 'Лот акативовано. Протягом наступних 72 годин триватимуть торги',

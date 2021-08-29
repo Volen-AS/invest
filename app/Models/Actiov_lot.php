@@ -57,7 +57,7 @@ class Actiov_lot extends Model
         self::checkTimelots($date);
 
         $actiov_lots = Actiov_lot::where('created_at','>',$date)->get();
-        $min_bet_act =  Own_token_by_emission::minbet();
+        $min_bet_act =  Own_token_by_emission::minBet();
         foreach($actiov_lots as $actiov_lot){
            $toker_rate_act = Token::where('date',$actiov_lot->emission_period)->first()->token_price;
             $final_date_act = $actiov_lot->created_at->addDays(3);

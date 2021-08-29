@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\TickerController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\ChatController;
-use App\Http\Controllers\Auction\AuctionController;
+use App\Http\Controllers\Auction\BuyTokenController;
 use App\Http\Controllers\Auction\LotAuctionController;
 use App\Http\Controllers\Auction\ActiveLotBetController;
 use App\Http\Controllers\Admin\TokenController;
@@ -58,7 +58,7 @@ Route::get('/editMessageAjax', [ChatController::class, 'editMessageAjax']);
 Route::get('/deleteMessageAjax', [ChatController::class, 'deleteMessageAjax']);
 
 // for token operation
-Route::get('/sendAjaxBuyNewToken', [AuctionController::class, 'BuyNewToken']);
+Route::post('/sendAjaxBuyNewToken', [BuyTokenController::class, 'BuyNewToken']);
 Route::get('/sendAjaxCreateLot', [LotAuctionController::class, 'CreateLot']);
 Route::get('/betOnPassAuction', [LotAuctionController::class, 'betOnPassAuction']);
 Route::get('/betOnActAuction', [ActiveLotBetController::class, 'betOnActAuction']);
@@ -115,7 +115,7 @@ Route::group(['prefix' => 'cabinet', 'middleware' => ['auth', 'home']], function
     Route::post('edit-auth/nickname', [UserResetAuthDataController::class, 'updateNickName'])->name('updateNickName');
     Route::post('edit-auth/email', [UserResetAuthDataController::class, 'updateEmail'])->name('updateEmail');
     Route::post('edit-auth/pass', [UserResetAuthDataController::class, 'changePassword'])->name('changePassword');
-    Route::get('finances/paymentSystems/payeer', [UserHomeownTokensController::class, 'payeer'])->name('payeer');
+    Route::get('finances/paymentSystems/payeer', [UserHomeController::class, 'payeer'])->name('payeer');
     Route::get('finances/paymentSystems/paypal', [UserHomeController::class, 'paypal'])->name('paypal');
     Route::get('finances/paymentSystems/skrill', [UserHomeController::class, 'skrill'])->name('skrill');
 

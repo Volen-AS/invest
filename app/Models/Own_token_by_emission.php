@@ -36,29 +36,33 @@ class Own_token_by_emission extends Model
     protected $fillable = ['u_id', 'date', 'token_rate', 'investment', 'own_token'
     ];
 
-    public static function checkIfUserCanGetBonus($u_id){
-        $total_token = Own_token_by_emission::all()->sum('own_token');
-        $user_owner_token = Own_token_by_emission::where('u_id',$u_id)->sum('own_token');
-        $norm = $total_token*0.0001; //  0.01% of total token
-        if($user_owner_token > $norm){
+    public static function checkIfUserCanGetBonus($u_id): bool
+    {
+        $totalToken = Own_token_by_emission::all()->sum('own_token');
+        $userOwnerToken = Own_token_by_emission::where('u_id', $u_id)->sum('own_token');
+        $norm = $totalToken * 0.0001; //  0.01% of total token
+
+        if ($userOwnerToken > $norm) {
             return true;
-        }
-        else{
+
+        } else {
             return false;
+
         }
     }
 
-    public static function totalToken(){
-        $totalToken = Own_token_by_emission::sum('own_token');
-        return $totalToken;
+    public static function totalToken()
+    {
+        return Own_token_by_emission::sum('own_token');
     }
 
-    public static function totalInvest(){
-        $totalToken = Own_token_by_emission::sum('investment');
-        return $totalToken;
+    public static function totalInvest()
+    {
+        return Own_token_by_emission::sum('investment');
     }
 
-    public static function myPercentOfToken($u_id){
+    public static function myPercentOfToken($u_id)
+    {
         $my_total_token = Own_token_by_emission::where('u_id',$u_id)->sum('own_token');
         $all_token = Own_token_by_emission::sum('own_token');
         if($my_total_token == 0){
@@ -70,25 +74,25 @@ class Own_token_by_emission extends Model
             return $my_per_cent_of_token;
         }
     }
-    public static function myTotalToken($u_id){
-        $my_total_token = Own_token_by_emission::where('u_id',$u_id)->sum('own_token');
-        return $my_total_token;
+
+    public static function myTotalToken($u_id)
+    {
+        return Own_token_by_emission::where('u_id',$u_id)->sum('own_token');
     }
 
-    public static function minbet(){
-        $total_amount = Own_token_by_emission::all()->sum('investment');
-        $min_bet = floatval(number_format($total_amount*0.0001,2));
-        return $min_bet;
+    public static function minBet(): float
+    {
+        return floatval(number_format(Own_token_by_emission::all()->sum('investment') * 0.0001,2));
     }
 
-    public static function minLot(){
-        $total_token = Own_token_by_emission::all()->sum('own_token');
-        $min_lot = floatval(number_format($total_token*0.0001,2));
-        return $min_lot;
+    public static function minLot(): float
+    {
+        return floatval(number_format(Own_token_by_emission::all()->sum('own_token') * 0.0001,2));
     }
+
 // add token from auction, second position in lot
-    public static function byNewToken($u_id,$amount){
-
+    public static function byNewToken($u_id,$amount)
+    {
         $rate = Token::getRateTokenToday();
         $date = date('Y.m.01');
         $new_token = number_format($amount['bet_amount']/$rate,2);
@@ -110,10 +114,10 @@ class Own_token_by_emission extends Model
             Statistic::updataBalancePlus($u_id,$amount['aff_reward']);
             return;
         }
-
     }
-    public static function addAuctionToken($u_id,$emission_period,$token,$price,$rate){
 
+    public static function addAuctionToken($u_id,$emission_period,$token,$price,$rate)
+    {
         $ownToken = Own_token_by_emission::where('date',$emission_period)->where('u_id', $u_id)->first();
         if(!is_Null($ownToken)){
             $new_investment = $ownToken->investment + $price;
@@ -132,7 +136,8 @@ class Own_token_by_emission extends Model
         }
     }
 
-    public static function liderPosition($u_id,$emission_period,$token,$price,$aff_reward){
+    public static function liderPosition($u_id,$emission_period,$token,$price,$aff_reward)
+    {
         $rate = Token::where('date',$emission_period)->first()->token_price;
         self::addAuctionToken($u_id,$emission_period,$token,$price,$rate);
         $affiliat = Referral::getAffilait($u_id);
@@ -148,8 +153,9 @@ class Own_token_by_emission extends Model
         }
 
     }
-    public static function updateToken($u_id,$token,$price,$emission_period){
 
+    public static function updateToken($u_id,$token,$price,$emission_period): void
+    {
         $ownToken = Own_token_by_emission::where('date',$emission_period)->where('u_id', $u_id)->first();
         $ownToken->investment = $ownToken->investment - $price;
         $ownToken->own_token = $ownToken->own_token - $token;

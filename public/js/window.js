@@ -83,7 +83,7 @@ $(document).on('click','#cal_token', function () {
     let check_amount = document.getElementById('buyNewToken');
     let max = parseFloat($(check_amount).attr("placeholder"));
     let token_price_to_day = $(document.getElementById('token_price_to_day')).data('token_price_to_day');
-    if($(check_amount).val() == ""){
+    if($(check_amount).val() === ""){
         $(check_amount).focus();
     }
     else{
@@ -105,7 +105,7 @@ $(document).on('click','#cal_token', function () {
 function sendAjaxBuyNewToken(amount){
     ajaxSetup();
     $.ajax({
-        type: 'get',
+        type: 'post',
         url: '/sendAjaxBuyNewToken',
         dataType:'json',
         data: {

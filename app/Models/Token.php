@@ -33,9 +33,9 @@ class Token extends Model
 
     public static function getRateTokenToday()
     {
-        $month = date('Y.m.01');
-        $rateTokenToday = Token::whereDate('date', $month)->first()->token_price;
-        return $rateTokenToday;
+        $tokenRate = Token::whereDate('date', date('Y.m.01'))->first();
+
+        return $tokenRate->token_price ?? 0;
     }
 
     public static function tokenByMounth()

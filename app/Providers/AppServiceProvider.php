@@ -6,6 +6,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Request;
+use Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(Request $request)
     {
+        Schema::defaultStringLength(191);
         //compose all the views....
         view()->composer('*', function ($view) use ($request)
         {

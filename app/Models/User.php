@@ -56,6 +56,8 @@ class User extends Authenticatable //implements MustVerifyEmail
         'name', 'email', 'password', 'role', 'code', 'u_id'
     ];
 
+    public static $PRIME_ROLE = 9;
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -86,11 +88,11 @@ class User extends Authenticatable //implements MustVerifyEmail
     }
 
 
-    public function getMyAffiliate(): User
+    public static function getMyAffiliate($user): User
     {
-        $affId = Referral::where('u_id', $this->id)->latest()->first();
+        $affId = Referral::where('u_id', $user->id)->latest()->first();
         if ($affId) {
-            return User::findOrFail($affId->reSendTo);
+            return User::find($affId->reSendTo);
         }
         return User::whereRole(9)->first();
 
@@ -105,65 +107,4 @@ class User extends Authenticatable //implements MustVerifyEmail
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//public static function addUsers(){
-//
-//    $reg = new RegisterController;
-//
-//    $primeAffiliat = User::where('role', 9)->select('u_id')->first();
-//    Session::put('primeAffiliat', $primeAffiliat);
-//    $_token  = Session::get('_token');
-//
-//    $users = array('Ukrbank', 'Vlad_Forex', 'Mono_Morc', 'Evhen_Zavarin', 'N_Zarubin', 'Blondateams', 'Trlvlad77', 'Kate_Voropaeva', 'S_T_E_F_F', 'Sensations', 'Svetlana_Vasilieva', 'Wombat', 'Nikita', 'Yura_levchenko', 'Zaur_Hazif', 'Yachmenov', 'Usmanov_Said', 'Radmir', 'Garant', 'Rasoshi777', 'Ustinov_R', 'Roman', 'Andrey_V', 'Zloymen', 'Ser_Seo', 'Slavonchek', 'Vovan', 'Yana-Shafar', 'Mariya', 'Maksim', 'Viktor N', 'Vanessa_Sky');
-//    $new_user = [];
-//    foreach ($users as $invester){
-//
-//        $array = [
-//            "_token" => $_token,
-//            "name" => $invester,
-//            "email" => $invester.'@gmail.com',
-//            "password" => "123123",
-//            "password_confirmation" => "123123"
-//        ];
-//        $reg->create($array);
-//        $new_user[] = $array;
-//    }
-//    dd($new_user);
-//}
-
 

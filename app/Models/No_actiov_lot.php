@@ -49,7 +49,7 @@ class No_actiov_lot extends Model
           $date = Carbon::now()->subDay(3);
           self::checkTimePasslots($date);
         $not_actiov_lots = No_actiov_lot::where('created_at','>',$date)->get();
-        $min_bet = Own_token_by_emission::minbet();
+        $min_bet = Own_token_by_emission::minBet();
         foreach ($not_actiov_lots as $not_actiov_lot){
             $final_date = $not_actiov_lot->created_at->addDays(3);
             $token_em_price = Token::where('date',$not_actiov_lot->emission_period)->first()->token_price;
