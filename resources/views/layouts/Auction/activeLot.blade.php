@@ -41,9 +41,9 @@
                 <td></td>
                 <td>{{ $actiov_lot->start_price }}</td>
                 <td></td>
-                <td>{{ $actiov_lot->previous_price['bet_amount'] }}</td>
+                <td>{{ $actiov_lot->previous_price['bet_amount'] ?? null}}</td>
                 <td></td>
-                <td>{{ $actiov_lot->lider_price['bet_amount'] }}</td>
+                <td>{{ $actiov_lot->lider_price['bet_amount'] ?? null}}</td>
                 <td></td>
                 <td><button class="buttom_table_money_cabinet_active">Зробити ставку</button></td>
             </tr>

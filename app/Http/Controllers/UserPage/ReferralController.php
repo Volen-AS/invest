@@ -3,14 +3,8 @@
 namespace App\Http\Controllers\UserPage;
 
 use App\Models\Chat_list_messegde;
-use App\Models\Own_token_by_emission;
-use App\Models\Post;
-use App\Models\Profile;
 use App\Models\Referral;
-use App\Models\Statistic;
 use App\Models\Ticker;
-use App\Models\Token;
-use App\Models\User;
 use Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -33,7 +27,7 @@ class ReferralController extends Controller
 
         return view('user.referrals.structure')
             ->with('referrals', $referrals)
-            ->with('affiliate', $request->user()->getMyAffiliate())
+            ->with('affiliate', $request->user()->getMyAffiliate($request->user()))
             ->with('chat_messegdes', Chat_list_messegde::getMessegde(Auth::id()))
             ->with('ticker', Ticker::getTicker());
     }
@@ -57,7 +51,7 @@ class ReferralController extends Controller
 
         return view('user.referrals.referralForm')
             ->with('referrals', $referrals)
-            ->with('affiliate', $request->user()->getMyAffiliate())
+            ->with('affiliate', $request->user()->getMyAffiliate($user))
             ->with('chat_messegdes', Chat_list_messegde::getMessegde(Auth::id()))
             ->with('ticker', Ticker::getTicker());
     }

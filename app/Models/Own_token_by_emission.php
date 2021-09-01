@@ -75,10 +75,10 @@ class Own_token_by_emission extends Model
         }
     }
 
-    public static function myTotalToken($u_id)
-    {
-        return Own_token_by_emission::where('u_id',$u_id)->sum('own_token');
-    }
+//    public static function myTotalToken($u_id)
+//    {
+//        return Own_token_by_emission::where('u_id',$u_id)->sum('own_token');
+//    }
 
     public static function minBet(): float
     {

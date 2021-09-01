@@ -36,7 +36,7 @@
                      <td></td>
                      <td>{{$not_actiov_lot->start_price}}</td>
                      <td></td>
-                     <td>{{$not_actiov_lot->first_price_lot['bet_amount']}}</td>
+                     <td>{{$not_actiov_lot->first_price_lot['bet_amount'] ?? null}}</td>
                      <td></td>
                      <td><button class="buttom_table_money_cabinet_pass">Зробити ставку</button></td>
                  </tr>

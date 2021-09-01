@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\No_actiov_history
@@ -43,6 +44,16 @@ class No_actiov_history extends Model
     protected $casts = [
         'first_price_lot' => 'array',
     ];
+
+    public function sellerUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id', 'seller_u_id');
+    }
+
+    public function firstBuyerUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id', 'first_buyer');
+    }
 
     public static function PassLolHistory($expired){
         No_actiov_history::create([

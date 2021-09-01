@@ -165,8 +165,8 @@ class UserHomeController extends Controller
             $user = Arr::add($user, 'user_total_invest',$user_total_invest);
             $each_mounths = [];
             for ($i = 1; $i <= $diff+1; $i++)  {
-                $present['sum_token'] = Own_token_by_emission::where('u_id',$user->u_id)->where('date',$start_time)->sum('own_token');
-                $present['sum_invest'] = Own_token_by_emission::where('u_id',$user->u_id)->where('date',$start_time)->sum('investment');
+                $present['sum_token'] = Own_token_by_emission::where('u_id',$user->id)->where('date',$start_time)->sum('own_token');
+                $present['sum_invest'] = Own_token_by_emission::where('u_id',$user->id)->where('date',$start_time)->sum('investment');
                 $present['rate'] = Token::where('date',$start_time)->first()->token_price;
                 $present['date'] = $start_time->format('m-Y');
                 $present['month'] = $start_time->format('m');
@@ -209,7 +209,7 @@ class UserHomeController extends Controller
                 }
                 else if(in_array($interes_from_refs_auction->lider_price_user,$team)){
                     $name_user = User::where('u_id', $interes_from_refs_auction->lider_price_user)->first()->name;
-                    $interes_from_refs_auction = array_add($interes_from_refs_auction, 'lider_name', $name_user);
+                    Arr::add($interes_from_refs_auction, 'lider_name', $name_user);
                 }
             }
             $mergedCollection= $interes_from_refs_buy_token->toBase()->merge($interes_from_refs_auctions);
@@ -220,68 +220,5 @@ class UserHomeController extends Controller
             'interest_from_refs'=>$interest_from_refs,
             'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
         ]);
-    }
-
-
-
-    public function referralsTokens() {
-        $u_id = Auth::id();
-        return view('user.tokens.referralsTokens')->with([
-            'ticker'=> Ticker::getTicker(),
-            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-        ]);
-
-    }
-
-    public function noActive() {
-        $u_id = Auth::id();
-        return view('user.tokens.noActive')->with([
-            'no_actiov_histores'=>No_actiov_history::getAllLotHistories(),
-            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-            'ticker'=> Ticker::getTicker(),
-            'not_actiov_lots'=>No_actiov_lot::notActiveLot()
-        ]);
-
-    }
-
-    public function activeLot() {
-        $u_id = Auth::id();
-        return view('user.tokens.activeLot')->with([
-            'ActLOtHistores'=>ActLOtHistory::getAllLotHistories(),
-            'rateTokenToday'=> Token::getRateTokenToday(),
-            'actiov_lots'=>Actiov_lot::activeLot(),
-            'ticker'=> Ticker::getTicker(),
-            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-        ]);
-
-    }
-
-    public function historyTrades() {
-        $u_id = Auth::id();
-        $historiesActLots = ActLOtHistory::getLotHistories($u_id);
-        $historiesNotActLots =No_actiov_history::getPassLolHistory($u_id);
-        return view('user.tokens.historyTrades')->with([
-
-            'ticker'=> Ticker::getTicker(),
-            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-            'historiesActLots'=>$historiesActLots,
-            'historiesNotActLots'=>$historiesNotActLots
-        ]);
-
-    }
-
-    public function historyRefferalLot() {
-        $u_id = Auth::id();
-        $team = Referral::getMyRefferalId($u_id);
-        $historiesActLotTeams = ActLOtHistory::getLotHistoriesTeam($team);
-        $historiesNotActLotTeams = No_actiov_history::getPassLolHistoryTeam($team);
-        return view('user.tokens.historyRefferalLot')->with([
-            'team'=>$team,
-            'historiesActLotsTeams'=>$historiesActLotTeams,
-            'historiesNotActLotTeams'=>$historiesNotActLotTeams,
-            'ticker'=> Ticker::getTicker(),
-            'chat_messegdes' => Chat_list_messegde::getMessegde($u_id),
-        ]);
-
     }
 }

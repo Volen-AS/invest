@@ -9,7 +9,7 @@
       <div class="col-lg-8 col-md-12 col-sm-12">
        <h1 class="name_title_cabinet">Активовані лоти аукціону</h1>
       <div class="table_no_active_lot">
-        @include('layouts.Auction.activLot')
+        @include('layouts.Auction.activeLot')
        </div>
 
 
@@ -57,11 +57,11 @@
         @include('layouts.chat')
       </div>
 
-   
-      
 
 
-      
+
+
+
 
     </div>
   </div>

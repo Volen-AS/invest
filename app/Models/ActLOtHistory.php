@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -51,40 +52,39 @@ class ActLOtHistory extends Model
         'lider_price' => 'array'
     ];
 
-    public static function AddLotHistories($lot){
-
-        ActLOtHistory::create([
-            'code_transaction_au'=>$lot->code_transaction_au,
-            'emission_period'=>$lot->emission_period,
-            'amount_token_lot'=>$lot->amount_token_lot,
-            'seller_u_id'=>$lot->seller_u_id,
-            'start_price'=>$lot->start_price,
-            'previous_price'=>$lot->previous_price,
-            'previous_price_user'=>$lot->previous_price_user,
-            'lider_price'=>$lot->lider_price,
-            'lider_price_user'=>$lot->lider_price_user
-        ]);
-        return;
+    public function sellerUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id', 'seller_u_id');
     }
+
+    public function previousPriceUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id', 'previous_price');
+    }
+
+    public function leaderPriceUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'id', 'lider_price_user');
+    }
+
     public static function getAllLotHistories(){
         $historiesActLots = ActLOtHistory::all();
         return $historiesActLots;
     }
 
-    public static function getLotHistories($u_id){
-        $historiesActLot = ActLOtHistory::where('seller_u_id', $u_id)
+    public static function getLotHistories($u_id)
+    {
+        return ActLOtHistory::where('seller_u_id', $u_id)
                                         ->orWhere('previous_price_user',$u_id)
                                         ->orWhere('lider_price_user',$u_id)
                                         ->get();
-            return $historiesActLot;
     }
 
     public static function getLotHistoriesTeam($team){
 
-        $historiesActLotsTeams = ActLOtHistory::whereIn('seller_u_id', $team)
+        return ActLOtHistory::whereIn('seller_u_id', $team)
             ->orWhereIn('previous_price_user',$team)
             ->orWhereIn('lider_price_user',$team)
             ->get();
-        return $historiesActLotsTeams;
     }
 }

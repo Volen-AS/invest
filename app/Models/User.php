@@ -87,6 +87,35 @@ class User extends Authenticatable //implements MustVerifyEmail
         return $this->hasOne(Statistic::class, 'u_id');
     }
 
+    public function OwnTokenByEmission(): HasMany
+    {
+        return $this->hasMany(Own_token_by_emission::class, 'u_id');
+    }
+
+    public function userSellActiveLotHistories(): HasMany
+    {
+        return $this->hasMany(ActLOtHistory::class, 'seller_u_id');
+    }
+
+    public function userPreviousPriceActiveLotHistories(): HasMany
+    {
+        return $this->hasMany(ActLOtHistory::class, 'previous_price_user');
+    }
+
+    public function userLeaderPriceActiveLotHistories(): HasMany
+    {
+        return $this->hasMany(ActLOtHistory::class, 'lider_price_user');
+    }
+
+    public function userSellerNotActiveLotHistories(): HasMany
+    {
+        return $this->hasMany(No_actiov_history::class, 'seller_u_id');
+    }
+
+    public function userFirstBuyerNotActiveLotHistories(): HasMany
+    {
+        return $this->hasMany(No_actiov_history::class, 'first_buyer');
+    }
 
     public static function getMyAffiliate($user): User
     {
