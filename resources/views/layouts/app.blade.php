@@ -496,28 +496,28 @@
                         <div class="open-menu"></div>
                         <div class="section_menu1 box-finansse">
                             <ul>
-                                <a href="{{ url('cabinet/tokens/ownTokens') }}"><li class="menu-item">Таблиця розподілу токенів по періодах емісії</li> </a>
-                                <a href="{{ url('cabinet/tokens/referralsTokens') }}"><li class="menu-item">Таблиця розподілу токенів рефералів своєї команди</li></a>
+                                <a href="{{ url('cabinet/tokens/own-tokens') }}"><li class="menu-item">Таблиця розподілу токенів по періодах емісії</li> </a>
+                                <a href="{{ url('cabinet/tokens/referrals-tokens') }}"><li class="menu-item">Таблиця розподілу токенів рефералів своєї команди</li></a>
                             </ul>
                         </div>
 
                         <div class="section_menu2 box-finansse">
                             <ul>
-                                <a href="{{ url('cabinet/tokens/noActive') }}"><li class="menu-item">Неактивовані лоти аукціону</li></a>
-                                <a href="{{ url('cabinet/tokens/activeLot') }}"><li class="menu-item">Активовані лоти аукціону</li></a>
+                                <a href="{{ url('cabinet/tokens/noActive-lots') }}"><li class="menu-item">Неактивовані лоти аукціону</li></a>
+                                <a href="{{ url('cabinet/tokens/active-lots') }}"><li class="menu-item">Активовані лоти аукціону</li></a>
                             </ul>
                         </div>
 
                         <div class="section_menu3 box-finansse">
                             <ul>
-                                <a href="{{ url('cabinet/tokens/historyTrades') }}"><li class="menu-item">Історія власних торгів (купівля, продаж) на аукціоні
+                                <a href="{{ url('cabinet/tokens/history-trades') }}"><li class="menu-item">Історія власних торгів (купівля, продаж) на аукціоні
                                 </li></a>
                             </ul>
                         </div>
 
                         <div class="section_menu4 box-finansse">
                             <ul>
-                                <a href="{{ url('cabinet/tokens/historyRefferalLot') }}"><li class="menu-item">Історія торгів на аукціоні за участю рефералів своєї команди</li></a>
+                                <a href="{{ url('cabinet/tokens/history-referral-Lot') }}"><li class="menu-item">Історія торгів на аукціоні за участю рефералів своєї команди</li></a>
 
                             </ul>
                         </div>

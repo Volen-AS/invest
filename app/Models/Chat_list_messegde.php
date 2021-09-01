@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Arr;
 use Illuminate\Database\Eloquent\Model;
 
 
@@ -33,8 +34,8 @@ class Chat_list_messegde extends Model
 		];
     protected $primaryKey = 'message_id';
 
-    public static function getMessegde($u_id){
-
+    public static function getMessegde($u_id)
+    {
         $my_chat = Auth()->User()->getChat_id()->chat_id;
         $affiliat = Referral::getAffilait($u_id);
         if($affiliat === false){
@@ -47,11 +48,11 @@ class Chat_list_messegde extends Model
                 foreach ($privet_msgs as $privet_msg){
                     if($privet_msg->u_id == $u_id){
                         $name_user = User::where('u_id', $privet_msg->to_uid)->first()->name;
-                        $privet_msg = array_add($privet_msg, 'user_msg_name', $name_user);
+                        Arr::add($privet_msg, 'user_msg_name', $name_user);
                     }
                     else {
                         $name_user = User::where('u_id', $privet_msg->u_id)->first()->name;
-                        $privet_msg = array_add($privet_msg, 'user_msg_name', $name_user);
+                        Arr::add($privet_msg, 'user_msg_name', $name_user);
                     }
                 }
             $mergedCollection= $group_messegdes->toBase()->merge($privet_msgs);
@@ -69,11 +70,11 @@ class Chat_list_messegde extends Model
                 foreach ($privet_msgs as $privet_msg){
                     if($privet_msg->u_id == $u_id){
                         $name_user = User::where('u_id', $privet_msg->to_uid)->first()->name;
-                        $privet_msg = array_add($privet_msg, 'user_msg_name', $name_user);
+                        Arr::add($privet_msg, 'user_msg_name', $name_user);
                     }
                     else {
                         $name_user = User::where('u_id', $privet_msg->u_id)->first()->name;
-                        $privet_msg = array_add($privet_msg, 'user_msg_name', $name_user);
+                        Arr::add($privet_msg, 'user_msg_name', $name_user);
                     }
                 }
             $mergedCollection= $group_messegdes->toBase()->merge($privet_msgs);

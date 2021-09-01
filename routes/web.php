@@ -22,6 +22,7 @@ use App\Http\Controllers\UserPage\UserHomeController;
 use App\Http\Controllers\UserPage\UserProfileController;
 use App\Http\Controllers\UserPage\UserResetAuthDataController;
 use App\Http\Controllers\UserPage\BlogController;
+use App\Http\Controllers\UserPage\UserTokensController;
 use App\Http\Controllers\GuestsNewsController;
 use App\Http\Controllers\ReplenishmentController;
 /*
@@ -129,12 +130,12 @@ Route::group(['prefix' => 'cabinet', 'middleware' => ['auth', 'home']], function
     Route::get('finances/transactionHistory', [UserHomeController::class, 'transactionHistory'])->name('transactionHistory');
     Route::get('finances/rewardHistory', [UserHomeController::class, 'rewardHistory'])->name('rewardHistory');
     Route::get('finances/accountsWallets', [UserHomeController::class, 'accountsWallets'])->name('accountsWallets');
-    Route::get('tokens/referralsTokens', [UserHomeController::class, 'referralsTokens']);
-    Route::get('tokens/ownTokens', [UserHomeController::class, 'ownTokens']);
-    Route::get('tokens/noActive', [UserHomeController::class, 'noActive']);
-    Route::get('tokens/activeLot', [UserHomeController::class,' activeLot']);
-    Route::get('tokens/historyTrades', [UserHomeController::class, 'historyTrades']);
-    Route::get('tokens/historyRefferalLot', [UserHomeController::class, 'historyRefferalLot']);
+    Route::get('tokens/referrals-tokens', [UserTokensController::class, 'referralsTokens']);
+    Route::get('tokens/own-tokens', [UserTokensController::class, 'ownTokens']);
+    Route::get('tokens/noActive-lots', [UserTokensController::class, 'noActive']);
+    Route::get('tokens/active-lots', [UserTokensController::class, 'activeLots']);
+    Route::get('tokens/history-trades', [UserTokensController::class, 'historyTrades']);
+    Route::get('tokens/history-referral-Lot', [UserTokensController::class, 'historyReferralLot']);
     Route::get('/management/{category}/{post?}', [BlogController::class, 'management']);
 });
 

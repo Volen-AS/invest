@@ -30,11 +30,11 @@
       </div>
 
        <div class="table_no_active_lot">
-        @include('layouts.Auction.passivLot')
+        @include('layouts.Auction.passiveLot')
        </div>
 
       <div class="table_active_lot">
-          @include('layouts.Auction.activLot')
+          @include('layouts.Auction.activeLot')
       </div>
 
       <div class="about_referral_cabinet">

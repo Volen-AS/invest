@@ -9,7 +9,7 @@
           <div class="col-lg-8 col-md-12 col-sm-12">
            <h1 class="name_title_cabinet">Неактивовані лоти аукціону</h1>
           <div class="table_no_active_lot">
-            @include('layouts.Auction.passivLot')
+            @include('layouts.Auction.passiveLot')
            </div>
 
 
@@ -39,7 +39,7 @@
                     <td></td>
                     <td>{{$no_actiov_histore->start_price}}</td>
                     <td></td>
-                    <td>{{$no_actiov_histore->first_price_lot['bet_amount']}}</td>
+                    <td>{{$no_actiov_histore->first_price_lot['bet_amount'] ?? null}}</td>
                   </tr>
 
                 @endforeach

@@ -69,20 +69,33 @@ class Actiov_lot extends Model
     }
     private static function checkTimelots($date){
         $expireds = Actiov_lot::where('created_at','<=',$date)->get();
-        if(count($expireds)){
-            foreach ($expireds as $expired) {
-               ActLOtHistory::AddLotHistories($expired);
-               Statistic::updataStatisticPlus($expired->seller_u_id,$expired->lider_price['bet_amount']);// seller
-               Own_token_by_emission::updateToken($expired->seller_u_id,$expired->amount_token_lot,
-                   $expired->start_price,$expired->emission_period); // take off selled token
-               Own_token_by_emission::byNewToken($expired->previous_price_user,$expired->previous_price);// second position
-               Own_token_by_emission::liderPosition($expired->lider_price_user,$expired->emission_period,
-                    $expired->amount_token_lot,$expired->start_price,$expired->lider_price['aff_reward']);//first position
-                $expired->delete();
-            }
-            return $date;
-        }else{
-            return $date;
+
+        foreach ($expireds as $expired) {
+           self::addLotHistories($expired);
+           Statistic::updataStatisticPlus($expired->seller_u_id,$expired->lider_price['bet_amount']);// seller
+           Own_token_by_emission::updateToken($expired->seller_u_id,$expired->amount_token_lot,
+               $expired->start_price,$expired->emission_period); // take off selled token
+           Own_token_by_emission::byNewToken($expired->previous_price_user,$expired->previous_price);// second position
+           Own_token_by_emission::liderPosition($expired->lider_price_user,$expired->emission_period,
+                $expired->amount_token_lot,$expired->start_price,$expired->lider_price['aff_reward']);//first position
+            $expired->delete();
         }
+        return $date;
+
+    }
+
+    private static function addLotHistories($lot): void
+    {
+        $history = new ActLOtHistory();
+        $history->code_transaction_au = $lot->code_transaction_au;
+        $history->emission_period = $lot->emission_period;
+        $history->amount_token_lot = $lot->amount_token_lot;
+        $history->seller_u_id = $lot->seller_u_id;
+        $history->start_price = $lot->start_price;
+        $history->previous_price = $lot->previous_price;
+        $history->previous_price_user = $lot->previous_price_user;
+        $history->lider_price = $lot->lider_price;
+        $history->lider_price_user = $lot->lider_price_user;
+        $history->save();
     }
 }
